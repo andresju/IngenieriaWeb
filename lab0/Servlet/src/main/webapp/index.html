@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>Hello You!</title>
+</head>
+<body>
+	<h1>Aplicacion notas</h1>
+	<form method="get" action="notes">
+		<input type="hidden" name="func" value="search">
+		Tarea <input type="text" name="task"><br/>
+		Contexto <input type="text" name="context"><br/>
+		Proyecto <input type="text" name="project"><br/>
+		Prioridad <input type="text" name="priority"><br/>
+		<input type="submit" value="Buscar">
+	</form>
+	<form method="get" action="notes">
+		<input type="hidden" name="func" value="all">
+		<input type="submit" value="Listar todas">
+	</form>
+</body>
+</html>
