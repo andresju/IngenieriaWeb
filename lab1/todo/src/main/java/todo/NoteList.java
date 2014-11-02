@@ -51,10 +51,25 @@ public class NoteList {
 		return list.size();
 	}
 	
-	public void eliminaNota(int pos) {
+	public void deleteNote(int pos) {
 		if (pos > 0 && pos <= list.size()) {
 			list.remove(pos-1);
 		}
+	}
+
+	public int deleteNote(String task) {
+		int i = 0;
+		int borradas = 0;
+		while (i < list.size()) {
+			if (list.get(i).getTask().equals(task)) {
+				list.remove(i);
+				borradas++;
+			}
+			else {
+				i++;
+			}
+		}
+		return borradas;
 	}
 
 }

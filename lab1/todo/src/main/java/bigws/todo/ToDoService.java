@@ -3,8 +3,8 @@ package bigws.todo;
 import java.util.List;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.jws.XmlElement;
 
 import todo.Note;
 import todo.NoteList;
@@ -18,19 +18,26 @@ public class ToDoService {
 	}
 
 	@WebMethod()
-	public String addNote(String task, String context, String project, int priority) {
+	public String addNote(@WebParam(name = "task") String task,
+				@WebParam(name = "context") String context,
+				@WebParam(name = "project") String project,
+				@WebParam(name = "priority") int priority) {
 		notes.add(new Note(task, context, project, priority));
-		return "Ok";
+		return "Nota añadida";
 	}
 
-	@XmlElement(name="Note", required=true) 
 	@WebMethod()
-	public List<Note> listarNotas() {
-		return notes.getAllNotes().toString();
+	public List<Note> listNotes() {
+		return notes.getAllNotes();
 	}
 	
 	@WebMethod()
-	public String sayHello(String name) {
-		return name + " " + notes.num();
+	public String countNotes() {
+		return "Hay " + notes.num() + " notas";
+	}
+
+	@WebMethod()
+	public String deleteNote(@WebParam(name = "task") String task) {
+		return "Se han borrado " + notes.deleteNote(task) + " notas";
 	}
 }
