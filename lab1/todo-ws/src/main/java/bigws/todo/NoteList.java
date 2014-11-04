@@ -57,6 +57,16 @@ public class NoteList {
 		}
 	}
 
+	public int countNotes(String task) {
+		int num = 0;
+		for (Note n : list) {
+			if (n.getTask().equals(task)) {
+				num++;
+			}
+		}
+		return num;
+	}
+
 	public int deleteNote(String task) {
 		int i = 0;
 		int borradas = 0;

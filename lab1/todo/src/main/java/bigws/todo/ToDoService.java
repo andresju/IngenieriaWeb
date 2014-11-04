@@ -37,6 +37,11 @@ public class ToDoService {
 	}
 
 	@WebMethod()
+	public int fetchNotes(@WebParam(name = "task") String task) {
+		return notes.countNotes(task);
+	}
+
+	@WebMethod()
 	public String deleteNote(@WebParam(name = "task") String task) {
 		return "Se han borrado " + notes.deleteNote(task) + " notas";
 	}

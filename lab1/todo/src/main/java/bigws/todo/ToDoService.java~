@@ -6,8 +6,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-//import todo.Note;
-//import todo.NoteList;
+import todo.Note;
+import todo.NoteList;
 
 @WebService
 public class ToDoService {

@@ -60,7 +60,7 @@ public class NoteList {
 	public int countNotes(String task) {
 		int num = 0;
 		for (Note n : list) {
-			if (n.getTask().equals(task)) {
+			if (n.getTask().equals(task) {
 				num++;
 			}
 		}

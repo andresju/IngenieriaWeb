@@ -12,6 +12,10 @@
 
 <xs:element name="deleteNoteResponse" type="tns:deleteNoteResponse"/>
 
+<xs:element name="fetchNotes" type="tns:fetchNotes"/>
+
+<xs:element name="fetchNotesResponse" type="tns:fetchNotesResponse"/>
+
 <xs:element name="listNotes" type="tns:listNotes"/>
 
 <xs:element name="listNotesResponse" type="tns:listNotesResponse"/>
@@ -69,6 +73,18 @@
 <xs:complexType name="addNoteResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="fetchNotes">
+<xs:sequence>
+<xs:element name="task" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="fetchNotesResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

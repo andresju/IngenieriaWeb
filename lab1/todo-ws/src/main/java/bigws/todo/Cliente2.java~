@@ -1,8 +1,5 @@
 package bigws.todo;
 
-//import todo.Note;
-//import todo.NoteList;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
@@ -18,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import com.google.gson.Gson;
-
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = { "/notes", "/anadir", "/eliminar", "/listar" })
 public class Cliente2 extends HttpServlet {
@@ -28,13 +23,12 @@ public class Cliente2 extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String func = req.getServletPath();
-//		String func = req.getParameter("func");
 		if (func.equals("/listar")) {
 			resp.setContentType("text/html");
 			PrintWriter out = resp.getWriter();
 			out.println("<html><head><title>Todas las tareas</title></head>"
 					+ "<body><h1>Todas las tareas</h1>"
-					+ "<table border=\"1\"><colgroup><col span=\"1\" style=\"color:white\" style=\"background-color:blue\">"
+					+ "<table border=\"1\"><colgroup><col span=\"1\" style=\"background-color:blue\">"
 					+ "</colgroup>"
 					+ "<tr><th>ID</th>"
 					+ "<th>Tarea</th>"
@@ -58,7 +52,43 @@ public class Cliente2 extends HttpServlet {
 					+ "<br/><br/><a href=\"javascript:history.back()\">Atras</a> "
 					+ "<a href=\"/\">Inicio</a>"
 					+ "</body></html>");
+		} else if (func.equals("/eliminar")) {
+			String task = req.getParameter("task");
+			PrintWriter out = resp.getWriter();
+			if (req.getParameter("confirm").equals("no")) {
+				int cuenta = cuentaNotas(task);
+				if (cuenta > 0) {
+					out.println("<html><head>"
+						+ "<title>Confimación eliminar</title></head>"
+						+ "<body><h1>Atención!</h1>"
+						+ "Se van a eliminar " + cuentaNotas(task) + " notas"
+						+ "<br/>¿Está seguro?<br/>"
+						+ "<br/><br/><a href=\"javascript:history.back()\">No </a> "
+						+ "<form id=\"eliminar\" method=\"get\" action=\"eliminar\">"
+						+ "<input type=\"hidden\" name=\"task\" value=\"" + task + "\"/>"
+						+ "<input type=\"hidden\" name=\"confirm\" value=\"yes\"/>"
+						+ "<a href=\"javascript:document.getElementById('eliminar').submit();\">Si</a>"
+						+ "</form>"
+						+ "</body></html>");
+				}
+				else {
+					//TODO Completar
+				}
+			} else if (req.getParameter("confirm").equals("yes")) {
+				out.println("<html><head><title>Tareas</title></head>"
+					+ "<body><h1>Tareas</h1>"
+					+ eliminaNotas(task)
+					+ "<br/><br/><a href=\"javascript:history.back()\">Atras</a> "
+					+ "<a href=\"/\">Inicio</a>"
+					+ "</body></html>");
+			}
 		}
+	}
+
+	private int cuentaNotas(String task) {
+		ToDoServiceService twss = new ToDoServiceService();
+		ToDoService tws = twss.getToDoServicePort();
+		return tws.fetchNotes(task);
 	}
 
 	private String anadirNota(String task, String context, String project, String priority) {
@@ -70,6 +100,12 @@ public class Cliente2 extends HttpServlet {
 		} catch (NumberFormatException e) {
 			return "Prioridad debe ser un número";
 		}
+	}
+
+	private String eliminaNotas(String task) {
+		ToDoServiceService twss = new ToDoServiceService();
+		ToDoService tws = twss.getToDoServicePort();
+		return tws.deleteNote(task);
 	}
 
 	private String todasNotas() {
