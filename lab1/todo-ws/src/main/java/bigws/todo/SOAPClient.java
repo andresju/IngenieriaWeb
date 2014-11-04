@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = { "/notes", "/anadir", "/eliminar", "/listar" })
-public class Cliente2 extends HttpServlet {
+public class SOAPClient extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
