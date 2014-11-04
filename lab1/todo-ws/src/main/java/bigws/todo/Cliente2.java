@@ -72,13 +72,17 @@ public class Cliente2 extends HttpServlet {
 						+ "</body></html>");
 				}
 				else {
-					//TODO Completar
+					out.println("<html><head><title>Tareas</title></head>"
+						+ "<body><h1>No se han encontrado notas</h1>"
+						+ "<br/><br/><a href=\"javascript:history.back()\">Atras</a> "
+						+ "<a href=\"/\">Inicio</a>"
+						+ "</body></html>");
 				}
 			} else if (req.getParameter("confirm").equals("yes")) {
 				out.println("<html><head><title>Tareas</title></head>"
 					+ "<body><h1>Tareas</h1>"
 					+ eliminaNotas(task)
-					+ "<br/><br/><a href=\"javascript:history.back()\">Atras</a> "
+					+ "<br/><br/><a href=\"eliminar.html\">Eliminar otra nota</a> "
 					+ "<a href=\"/\">Inicio</a>"
 					+ "</body></html>");
 			}
